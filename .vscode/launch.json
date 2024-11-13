@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Django",
+            "type": "python",
+            "request": "launch",
+            "manage": true,
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "config.settings"
+            },
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "runserver",
+                "9000"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}
