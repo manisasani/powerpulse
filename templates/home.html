@@ -1,0 +1,49 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}home{% endblock title %}
+{% block content %}
+<!-- Hero Section -->
+<section id="hero" class="hero">
+    <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2>PowerPlus to build your ideal body<span>.</span></h2>
+                <p>We are a team of talented digital marketers</p>
+            </div>
+        </div>
+        <div class="row gy-4 mt-5 justify-content-center">
+            <div class="col-xl-2 col-md-4">
+                <div class="icon-box">
+                    <i class="bi bi-binoculars"></i>
+                    <h3><a href="">Lorem Ipsum</a></h3>
+                </div>
+            </div>
+            <div class="col-xl-2 col-md-4">
+                <div class="icon-box">
+                    <i class="bi bi-bullseye"></i>
+                    <h3><a href="">Dolor Sitema</a></h3>
+                </div>
+            </div>
+            <div class="col-xl-2 col-md-4">
+                <div class="icon-box">
+                    <i class="bi bi-fullscreen-exit"></i>
+                    <h3><a href="">Sedare Perspiciatis</a></h3>
+                </div>
+            </div>
+            <div class="col-xl-2 col-md-4">
+                <div class="icon-box">
+                    <i class="bi bi-card-list"></i>
+                    <h3><a href="">Magni Dolores</a></h3>
+                </div>
+            </div>
+            <div class="col-xl-2 col-md-4">
+                <div class="icon-box">
+                    <i class="bi bi-gem"></i>
+                    <h3><a href="">Nemos Enimade</a></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
