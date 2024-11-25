@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+</head>
+<body>
+    <section>
+        {% for i in "x"|rjust:"200" %}
+        <span></span>
+        {% endfor %}
+        
+        <div class="signin">
+            <div class="content">
+                <h2>Log In</h2>
+                <div class="form">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="inputBox">
+                            <input type="text" name="username" required>
+                            <i>Username</i>
+                        </div>
+                        <br>
+                        <div class="inputBox">
+                            <input type="password" name="password" required>
+                            <i>Password</i>
+                        </div>
+                        <div class="links">
+                            <a href="{% url 'password_reset' %}">Forgot Password</a>
+                            <a href="{% url 'signup' %}">Signup</a>
+                        </div>
+                        <br>
+                        <div class="inputBox">
+                            <input type="submit" value="Login">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
