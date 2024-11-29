@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+</head>
+<body>
+    <section>
+        {% for i in "x"|rjust:"200" %}
+            <span></span>
+        {% endfor %}
+        <div class="signin">
+            <div class="content">
+                <h2>Log Out</h2>
+                <div class="form">
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                        <p>Are you sure you want to sign out?</p>
+                        <br>
+                        <div class="inputBox">
+                            <input type="submit" value="Log Out">
+                        </div>
+                    </form>
+                </div>
+                <div class="links">
+                    <a href="{% url 'account_login' %}">Return to Login</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -9,7 +9,7 @@
 <body>
     <section>
         {% for i in "x"|rjust:"200" %}
-        <span></span>
+            <span></span>
         {% endfor %}
         <div class="signin">
             <div class="content">
@@ -18,23 +18,13 @@
                     <form method="post">
                         {% csrf_token %}
                         <div class="inputBox">
-                            <input type="text" name="first_name" required>
-                            <i>First Name</i>
-                        </div>
-                        <br>
-                        <div class="inputBox">
-                            <input type="text" name="last_name" required>
-                            <i>Last Name</i>
+                            <input type="email" name="email" required>
+                            <i>Email</i>
                         </div>
                         <br>
                         <div class="inputBox">
                             <input type="text" name="username" required>
                             <i>Username</i>
-                        </div>
-                        <br>
-                        <div class="inputBox">
-                            <input type="email" name="email" required>
-                            <i>Email</i>
                         </div>
                         <br>
                         <div class="inputBox">
@@ -44,10 +34,10 @@
                         <br>
                         <div class="inputBox">
                             <input type="password" name="password2" required>
-                            <i>Confirm Password</i>
+                            <i>Password (again)</i>
                         </div>
                         <div class="links">
-                            <a href="{% url 'login' %}">Already have an account?</a>
+                            <a href="{% url 'account_login' %}">Already have an account?</a>
                         </div>
                         <br>
                         <div class="inputBox">

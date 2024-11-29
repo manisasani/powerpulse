@@ -86,7 +86,7 @@ section .signin .content {
 
 section .signin .content h2 {
     font-size: 2em;
-    color:#ffc451;
+    color: #ffc451;
     text-transform: uppercase;
 }
 
@@ -145,13 +145,13 @@ section .signin .content .form .inputBox i {
 }
 
 .signin .content .form .links a:nth-child(2) {
-    color:#ffc451;
+    color: #ffc451;
     font-weight: 600;
 }
 
 .signin .content .form .inputBox input[type="submit"] {
     padding: 10px;
-    background:#ffc451;
+    background: #ffc451;
     color: #000;
     font-weight: 600;
     font-size: 1.35em;
@@ -161,6 +161,18 @@ section .signin .content .form .inputBox i {
 
 input[type="submit"]:active {
     opacity: 0.6;
+}
+
+section .signin .content .form .password-rules {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+section .signin .content .form .password-rules li {
+    color: #ffc451;
+    font-size: 0.9em;
+    margin-bottom: 5px;
 }
 
 @media (max-width: 900px) {

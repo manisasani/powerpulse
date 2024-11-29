@@ -20,7 +20,7 @@
                         {% csrf_token %}
                         <div class="inputBox">
                             <input type="text" name="username" required>
-                            <i>Username</i>
+                            <i>Username or email</i>
                         </div>
                         <br>
                         <div class="inputBox">
@@ -28,8 +28,8 @@
                             <i>Password</i>
                         </div>
                         <div class="links">
-                            <a href="{% url 'password_reset' %}">Forgot Password</a>
-                            <a href="{% url 'signup' %}">Signup</a>
+                            <a href="{% url 'account_reset_password' %}">Forgot Password</a>
+                            <a href="{% url 'account_signup' %}">Signup</a>
                         </div>
                         <br>
                         <div class="inputBox">
