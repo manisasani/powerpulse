@@ -4,57 +4,57 @@
 {% block content %}
 <!-- Hero Section -->
 <section id="hero" class="hero">
-    <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="">
+    <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="" class="animate-fadeIn">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h2>PowerPlus to build your ideal body<span>.</span></h2>
-                <p>We are a team of talented digital marketers</p>
+                <h2 class="animate-fadeInUp delay-2">PowerPlus to build your ideal body<span>.</span></h2>
+                <p class="animate-fadeInUp delay-2">We are a team of talented digital marketers</p>
             </div>
         </div>
         <div class="row gy-4 mt-5 justify-content-center">
             <div class="col-xl-2 col-md-4">
-                <div class="icon-box">        
-            <i class="bi">
-                <svg width="60" height="60" fill="currentColor">
-                    <image href="{% static 'assets/icons/food.ico' %}" width="60" height="60"/>
-                </svg>
-            </i>
-                    <h3><a href="">Meal plan</a></h3>
+                <div class="icon-box animate-scaleIn delay-1">        
+                    <i class="bi">
+                        <svg width="60" height="60" fill="currentColor">
+                            <image href="{% static 'assets/icons/food.ico' %}" width="60" height="60"/>
+                        </svg>
+                    </i>
+                            <h3><a href="">Meal plan</a></h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4">
+                        <div class="icon-box animate-scaleIn delay-2">
+                    <i class="bi">
+                        <svg width="70" height="70" fill="currentColor">
+                            <image href="{% static 'assets/icons/Dumbbell.ico' %}" width="70" height="70"/>
+                        </svg>
+                    </i>
+                            <h3><a href="">Workout plan</a></h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4">
+                        <div class="icon-box animate-scaleIn delay-3">
+                    <i class="bi">
+                        <svg width="85" height="85" fill="currentColor">
+                            <image href="{% static 'assets/icons/gym.ico' %}" width="85" height="85"/>
+                        </svg>
+                    </i>
+                            <h3><a href="">Muscle training</a></h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4">
+                        <div class="icon-box animate-scaleIn delay-4">
+                    <i class="bi">
+                        <svg width="50" height="50" fill="currentColor">
+                            <image href="{% static 'assets/icons/newspaper.ico' %}" width="50" height="50"/>
+                        </svg>
+                    </i>
+                            <h3><a href="">Articles</a></h3>
                 </div>
             </div>
             <div class="col-xl-2 col-md-4">
-                <div class="icon-box">
-            <i class="bi">
-                <svg width="70" height="70" fill="currentColor">
-                    <image href="{% static 'assets/icons/Dumbbell.ico' %}" width="70" height="70"/>
-                </svg>
-            </i>
-                    <h3><a href="">Workout plan</a></h3>
-                </div>
-            </div>
-            <div class="col-xl-2 col-md-4">
-                <div class="icon-box">
-            <i class="bi">
-                <svg width="85" height="85" fill="currentColor">
-                    <image href="{% static 'assets/icons/gym.ico' %}" width="85" height="85"/>
-                </svg>
-            </i>
-                    <h3><a href="">Muscle training</a></h3>
-                </div>
-            </div>
-            <div class="col-xl-2 col-md-4">
-                <div class="icon-box">
-            <i class="bi">
-                <svg width="50" height="50" fill="currentColor">
-                    <image href="{% static 'assets/icons/newspaper.ico' %}" width="50" height="50"/>
-                </svg>
-            </i>
-                    <h3><a href="">Articles</a></h3>
-                </div>
-            </div>
-            <div class="col-xl-2 col-md-4">
-                <div class="icon-box">
+                <div class="icon-box animate-scaleIn delay-5">
             <i class="bi">
                 <svg width="50" height="50" fill="currentColor">
                     <image href="{% static 'assets/icons/calories.ico' %}" width="50" height="50"/>
@@ -66,4 +66,85 @@
         </div>
     </div>
 </section>
+
+<!-- About Section -->
+<section id="about" class="about section">
+    <div class="container" data-aos="fade-up">
+        <div class="row gy-4">
+            <!-- Text content moved to first position -->
+            <div class="col-lg-6 content ps-lg-6">
+                <h3>Benefits of Bodybuilding for Health</h3>
+                <p class="fst-italic" style="color: white;">
+                  Bodybuilding is one of the best ways to achieve lasting health and enhance your overall quality of life. This sport not only strengthens your muscles and boosts your physical power, but also has remarkable effects on your mental well-being. By adopting healthy habits and staying motivated through bodybuilding, you can lead a more active and fulfilling life.
+                </p>
+                <ul>
+                    <li style="color: white;"><i class="bi bi-check2-circle"></i> <span>Build Strong Muscles and Bones Strength training helps you develop stronger muscles and healthier bones.</span></li>
+                    <li style="color: white;"><i class="bi bi-check2-circle"></i> <span>Boost Metabolism and Lose Weight Regular bodybuilding exercises increase your metabolism and help reduce excess fat.</span></li>
+                    <li style="color: white;"><i class="bi bi-check2-circle"></i> <span> Improve Heart and Cardiovascular Health Bodybuilding promotes blood circulation, improving your heart health.</span></li>
+                    <li style="color: white;"><i class="bi bi-check2-circle"></i> <span>  Enhance Mood and Reduce Stress Bodybuilding workouts boost endorphins, improving your mental well-being.</span></li>
+                </ul>
+                <p style="color: #ffc451">
+                   Bodybuilding is not just a sport—it’s a lifestyle transformation. If you’re looking to improve your health and build self-confidence, start your bodybuilding journey today and experience its amazing benefits.
+                </p>
+            </div>
+            <!-- Image moved to second position -->
+        <div class="col-lg-4 offset-lg-1">
+            <div class="about-img">
+                <img src="{% static 'assets/img/about.jpg' %}" class="img-fluid small-img" alt="">
+            </div>
+        </div>
+</section>
+<!-- Testimonials Section -->
+<section id="testimonials" class="testimonials section dark-background">
+    <img src="{% static 'assets/img/back.jpg' %}" class="testimonials-bg" alt="">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+            {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                "delay": 5000
+                },
+                "slidesPerView": "auto",
+                "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+                }
+            }
+            </script>            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="testimonial-item">
+                        <img src="{% static 'assets/img/mani.jpg' %}" class="testimonial-img" alt="">
+                        <h3>Mani Sasani</h3>
+                        <h4>programer</h4>
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        </div>
+                        
+                        <!-- Social Media Links -->
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/manisasani.dev/" target="_blank">
+                                <i class="bi bi-instagram"></i>
+                                <span>instagram</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/manisasani/" target="_blank">
+                                <i class="bi bi-linkedin"></i>
+                                <span>linkedin</span>
+                            </a>
+                            <a href="https://github.com/manisasani" target="_blank">
+                                <i class="bi bi-github"></i>
+                                <span>github</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+
+<!-- Team Section -->
 {% endblock content %}
