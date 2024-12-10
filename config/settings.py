@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     #local apps
     "accounts",
     "pages",
+    "mealplan",
 ]
 
 SITE_ID = 1
