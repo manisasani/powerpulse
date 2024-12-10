@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import UserInfoForm , DiteGoalForm , ActivityLevelForm
+from .forms import UserInfoForm, DietGoalForm, ActivityLevelForm
 from . models import UserDietInfo, DietPlan
 
 
@@ -19,25 +19,25 @@ class UserInfoView(LoginRequiredMixin, FormView):
 
 class DietGoalView(LoginRequiredMixin, FormView):
     template_name = 'diet/diet_goal.html'
-    form_class = DiteGoalForm
-    success_url = 'diet/activity/'
+    form_class = DietGoalForm
+    success_url = "/diet/activity/"
 
-    def from_valid(self, form):
+    def form_valid(self, form):
         user_info_id = self.request.session.get('user_diet_info_id')
         user_info = UserDietInfo.objects.get(id=user_info_id)
-        user_info.goal = form.cleaned_date['goal']
+        user_info.goal = form.cleaned_data["goal"]
         user_info.save()
         return super().form_valid(form)
 
 class ActivityLevelView(LoginRequiredMixin, FormView):
     template_name = 'diet/activity.html'
     form_class = ActivityLevelForm
-    success_url = 'diet/plan'
+    success_url = '/diet/plan/'
 
     def form_valid(self, form):
         user_info_id = self.request.session.get('user_diet_info_id')
         user_info = UserDietInfo.objects.get(id=user_info_id)
-        user_info.activity_level = form.cleaned_date["activity_level"]
+        user_info.activity_level = form.cleaned_data["activity_level"]
         user_info.save()
         return super().form_valid(form)
 

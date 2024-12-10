@@ -24,5 +24,7 @@ urlpatterns = [
     path('__debug__/', include("debug_toolbar.urls")),
     path('', include('pages.urls')),
     path('accounts/', include('allauth.urls')),
+    path('diet/', include('mealplan.urls')),
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

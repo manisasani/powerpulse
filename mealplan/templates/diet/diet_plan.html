@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>برنامه غذایی پیشنهادی</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5>کالری روزانه مورد نیاز: {{ daily_calories|floatformat:0 }}</h5>
+            <h6>برنامه غذایی:</h6>
+            {{ diet_plan.meal_plan|linebreaks }}
+        </div>
+    </div>
+</div>
+{% endblock %}
