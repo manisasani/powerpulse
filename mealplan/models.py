@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.db import models
+
 class DietGoal(models.Model):
     goal = models.CharField(
         max_length=20,
@@ -19,19 +22,22 @@ class DietGoal(models.Model):
 
 
 class ActivityLevel(models.Model):
+    ACTIVITY_CHOICES = [
+        ("low", "کم"),
+        ("medium", "متوسط"),
+        ("high", "زیاد"),
+        ("athlete", "ورزشکار"),
+    ]
+
     level = models.CharField(
         max_length=20,
-        choices=[
-            ("low", "کم"),
-            ("medium", "متوسط"),
-            ("high", "زیاد"),
-            ("athlete", "ورزشکار"),
-        ],
+        choices=ACTIVITY_CHOICES,
         unique=True,
     )
+    multiplier = models.FloatField()
 
     def __str__(self):
-        return self.get_level_display()
+        return dict(self.ACTIVITY_CHOICES)[self.level]
 
 class UserDietInfo(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL , on_delete=models.CASCADE)
@@ -46,31 +52,50 @@ class UserDietInfo(models.Model):
     def calculate_bmr(self):
 
         if self.gender == "M":
-            return (
-                88.362
-                + (13.397 * self.weight)
-                + (4.799 * self.height)
-                - (5.677 * self.age)
-            )
+            bmr = (10 * self.weight) + (6.25 * self.height) - (5 * self.age) + 5
         else:
-            return (
-                447.593
-                + (9.247 * self.weight)
-                + (3.098 * self.height)
-                - (4.330 * self.age)
-            )
+            bmr = (10 * self.weight) + (6.25 * self.height) - (5 * self.age) - 161
+        return bmr
+    def __str__(self):
+        return f"{self.first_name}"
+
 
 class DietPlan(models.Model):
-    class Meta:
-            ordering = ['goal', 'activity_level'] 
-            verbose_name = 'Diet Plan'  
-            verbose_name_plural = 'Diet Plans'  
+    goal = models.ForeignKey(DietGoal, on_delete=models.CASCADE)
+    calorie_range_min = models.IntegerField(default=0)
+    calorie_range_max = models.IntegerField(default=0)
+    breakfast = models.TextField(default="")
+    lunch = models.TextField(default="")
+    dinner = models.TextField(default="")
+    snacks = models.TextField(default="")
+    snacks2 = models.TextField(default="")
+    snacks3 = models.TextField(blank=True, default="")
+    protein_percentage = models.IntegerField(default=0)
+    carbs_percentage = models.IntegerField(default=0)
+    fat_percentage = models.IntegerField(default=0)
+    notes = models.TextField(blank=True, default="")
 
-    user_info = models.ForeignKey(UserDietInfo, on_delete=models.CASCADE)
-    goal = models.ForeignKey(DietGoal, on_delete=models.SET_NULL, null=True)
-    activity_level = models.ForeignKey(ActivityLevel, on_delete=models.SET_NULL , null=True)
-    calories = models.IntegerField()
-    protein = models.IntegerField() #in grams
-    carbs = models.IntegerField() #in grams
-    fats = models.IntegerField() #in grams
-    meal_plan = models.TextField() 
+    def validate_macros(self):
+        """اعتبارسنجی مقادیر ماکروها"""
+        total = self.protein_percentage + self.carbs_percentage + self.fat_percentage
+        if total != 100:
+            return False, f"مجموع درصدهای ماکروها باید 100 باشد. مقدار فعلی: {total}"
+
+        if self.fat_percentage < 20:
+            return False, "درصد چربی نباید کمتر از 20 درصد باشد"
+
+        return True, "OK"
+
+    def save(self, *args, **kwargs):
+        is_valid, message = self.validate_macros()
+        if not is_valid:
+            raise ValidationError(message)
+        super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ["goal", "calorie_range_min"]
+        verbose_name = "Diet Plan"
+        verbose_name_plural = "Diet Plans"
+
+    def __str__(self):
+        return f"Diet Plan for {self.goal} ({self.calorie_range_min}-{self.calorie_range_max} cal)"

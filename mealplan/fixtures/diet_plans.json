@@ -1,0 +1,36 @@
+# در فایل fixtures/diet_plans.json
+[
+    {
+        "model": "mealplan.dietplan",
+        "pk": 1,
+        "fields": {
+            "goal": "lose_weight",
+            "calorie_range_min": 1500,
+            "calorie_range_max": 2000,
+            "breakfast": "- 2 تخم مرغ کامل\n- 30 گرم جو دوسر\n- 1 عدد میوه\n- 1 لیوان شیر کم چرب",
+            "lunch": "- 150 گرم سینه مرغ\n- 1 پیمانه برنج قهوه‌ای\n- سالاد فصل\n- 1 قاشق روغن زیتون",
+            "dinner": "- 150 گرم ماهی\n- سبزیجات پخته\n- 1/2 پیمانه کینوا",
+            "snacks": "- 30 گرم آجیل خام\n- 1 عدد میوه\n- ماست کم چرب",
+            "protein_percentage": 40,
+            "carbs_percentage": 30,
+            "fat_percentage": 30,
+            "notes": "مصرف آب کافی (حداقل 8 لیوان) در طول روز"
+        }
+    },
+    {
+        "model": "mealplan.dietplan",
+        "fields": {
+            "goal": "gain_weight",
+            "calorie_range_min": 2500,
+            "calorie_range_max": 3000,
+            "breakfast": "- 3 تخم مرغ کامل\n- 60 گرم جو دوسر\n- 2 عدد موز\n- 2 لیوان شیر",
+            "lunch": "- 200 گرم گوشت قرمز\n- 2 پیمانه برنج\n- سالاد فصل\n- آووکادو",
+            "dinner": "- 200 گرم مرغ\n- سیب زمینی\n- سبزیجات\n- ماست پرچرب",
+            "snacks": "- شیک پروتئین\n- 50 گرم آجیل\n- 2 عدد میوه\n- نان و کره بادام زمینی",
+            "protein_percentage": 30,
+            "carbs_percentage": 50,
+            "fat_percentage": 20,
+            "notes": "مصرف وعده‌های غذایی منظم و کامل"
+        }
+    }
+]

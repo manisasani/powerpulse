@@ -1,14 +1,84 @@
 {% extends '_base.html' %}
-
 {% block content %}
-<div class="container">
-    <h2>برنامه غذایی پیشنهادی</h2>
-    <div class="card">
+<div class="container my-5">
+    <h2 class="mb-4">برنامه غذایی پیشنهادی</h2>
+    
+    <!-- اطلاعات کلی -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>اطلاعات کلی</h5>
+        </div>
         <div class="card-body">
-            <h5>کالری روزانه مورد نیاز: {{ daily_calories|floatformat:0 }}</h5>
-            <h6>برنامه غذایی:</h6>
-            {{ diet_plan.meal_plan|linebreaks }}
+            <p>کالری روزانه مورد نیاز: {{ daily_calories|floatformat:0 }} کالری</p>
+            
+            {% if diet_plan %}
+                <h6>ماکرونوترینت‌های روزانه:</h6>
+                <ul>
+                    <li>پروتئین: {{ macros.protein|default:0 }} گرم</li>
+                    <li>کربوهیدرات: {{ macros.carbs|default:0 }} گرم</li>
+                    <li>چربی: {{ macros.fats|default:0 }} گرم</li>
+                </ul>
+            {% endif %}
         </div>
     </div>
+
+    {% if diet_plan %}
+        <!-- برنامه غذایی -->
+        <div class="card">
+            <div class="card-header">
+                <h5>برنامه غذایی روزانه</h5>
+            </div>
+            <div class="card-body">
+                <div class="meal-section mb-4">
+                    <h6 class="text-primary">صبحانه:</h6>
+                    <div class="ml-4">
+                        {{ diet_plan.breakfast|linebreaks|default:"برنامه صبحانه تعریف نشده" }}
+                    </div>
+                </div>
+                <div class="meal-section mb-4">
+                        <h6 class="text-primary">میان وعده‌ها:</h6>
+                        <div class="ml-4">
+                            {{ diet_plan.snacks|linebreaks|default:"برنامه میان وعده تعریف نشده" }}
+                        </div>
+                    </div>
+                <div class="meal-section mb-4">
+                        <h6 class="text-primary">ناهار:</h6>
+                        <div class="ml-4">
+                            {{ diet_plan.lunch|linebreaks|default:"برنامه ناهار تعریف نشده" }}
+                    </div>
+                </div>
+                <div class="meal-section mb-4">
+                    <h6 class="text-primary">میان وعده‌ها:</h6>
+                    <div class="ml-4">
+                        {{ diet_plan.snacks2|linebreaks|default:"برنامه میان وعده تعریف نشده" }}
+                    </div>
+                </div>
+                <div class="meal-section mb-4">
+                    <h6 class="text-primary">شام:</h6>
+                    <div class="ml-4">
+                        {{ diet_plan.dinner|linebreaks|default:"برنامه شام تعریف نشده" }}
+                    </div>
+                </div>
+                {% if diet_plan.notes %}
+                    <div class="alert alert-info">
+                        <h6>نکات مهم:</h6>
+                        {{ diet_plan.notes|linebreaks }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            <h5>توجه!</h5>
+            <p>{{ error|default:"در حال حاضر برنامه غذایی مناسبی برای شما یافت نشد. لطفاً با پشتیبانی تماس بگیرید." }}</p>
+        </div>
+    {% endif %}
 </div>
+
+<style>
+    .meal-section {
+        border-left: 3px solid #007bff;
+        padding-left: 15px;
+    }
+</style>
 {% endblock %}
