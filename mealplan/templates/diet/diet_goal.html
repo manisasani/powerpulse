@@ -1,12 +1,51 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<div class="container">
-    <h2>هدف شما از برنامه غذایی</h2>
-    <form method="post">
+<div class="goals-container">
+    <div class="goals-header">
+        <h2>Set Your Diet Goal</h2>
+        <p class="subtitle">Select the option that best describes your diet goal.</p>
+    </div>
+
+    <form method="POST" action="{% url 'mealplan:diet_goal' %}" id="goalsForm" class="goals-form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">مرحله بعد</button>
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors }}
+            </div>
+        {% endif %}
+        <div class="goals-list">
+            {% for choice in form.goal.field.queryset %}
+            <div class="goal-option">
+                <input 
+                    type="radio" 
+                    id="goal-{{ choice.pk }}" 
+                    name="goal" 
+                    value="{{ choice.pk }}" 
+                    class="goal-checkbox"
+                    {% if form.goal.value == choice.pk %}checked{% endif %} 
+                    required>
+                <label for="goal-{{ choice.pk }}" class="goal-button">{{ choice.get_goal_display }}</label>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if form.errors %}
+        <div class="form-errors">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="navigation-buttons">
+            <a href="{% url 'mealplan:diet_plan' %}" class="back-button">BACK</a>
+            <button type="submit" id="nextButton" class="next-button">NEXT</button>
+        </div>
     </form>
 </div>
 {% endblock %}

@@ -1,84 +1,153 @@
 {% extends '_base.html' %}
 {% block content %}
-<div class="container my-5">
-    <h2 class="mb-4">برنامه غذایی پیشنهادی</h2>
-    
-    <!-- اطلاعات کلی -->
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5>اطلاعات کلی</h5>
+<div class="diet-plan-container">
+    <!-- User Info Section -->
+     <br>
+     <br>
+     <br>
+    <div class="plan-section user-info">
+        <div class="section-header">
+            <h2>اطلاعات شخصی</h2>
         </div>
-        <div class="card-body">
-            <p>کالری روزانه مورد نیاز: {{ daily_calories|floatformat:0 }} کالری</p>
+        <div class="section-content">
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">نام:</span>
+                    <span class="info-value">{{ user_info.first_name }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">سن:</span>
+                    <span class="info-value">{{ user_info.age }} سال</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">قد:</span>
+                    <span class="info-value">{{ user_info.height }} سانتی‌متر</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">وزن:</span>
+                    <span class="info-value">{{ user_info.weight }} کیلوگرم</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calories & Macros Section -->
+    <div class="plan-section macros">
+        <div class="section-header">
+            <h2>اطلاعات تغذیه‌ای</h2>
+        </div>
+        <div class="section-content">
+            <div class="calories-box">
+                <span class="calories-value">{{ daily_calories|floatformat:0 }}</span>
+                <span class="calories-label">کالری روزانه</span>
+            </div>
             
             {% if diet_plan %}
-                <h6>ماکرونوترینت‌های روزانه:</h6>
-                <ul>
-                    <li>پروتئین: {{ macros.protein|default:0 }} گرم</li>
-                    <li>کربوهیدرات: {{ macros.carbs|default:0 }} گرم</li>
-                    <li>چربی: {{ macros.fats|default:0 }} گرم</li>
-                </ul>
+            <div class="macros-grid">
+                <div class="macro-item protein">
+                    <div class="macro-icon">🥩</div>
+                    <div class="macro-details">
+                        <span class="macro-value">{{ macros.protein|default:0 }}g</span>
+                        <span class="macro-label">پروتئین</span>
+                    </div>
+                </div>
+                <div class="macro-item carbs">
+                    <div class="macro-icon">🍚</div>
+                    <div class="macro-details">
+                        <span class="macro-value">{{ macros.carbs|default:0 }}g</span>
+                        <span class="macro-label">کربوهیدرات</span>
+                    </div>
+                </div>
+                <div class="macro-item fats">
+                    <div class="macro-icon">🥑</div>
+                    <div class="macro-details">
+                        <span class="macro-value">{{ macros.fats|default:0 }}g</span>
+                        <span class="macro-label">چربی</span>
+                    </div>
+                </div>
+            </div>
             {% endif %}
         </div>
     </div>
 
     {% if diet_plan %}
-        <!-- برنامه غذایی -->
-        <div class="card">
-            <div class="card-header">
-                <h5>برنامه غذایی روزانه</h5>
-            </div>
-            <div class="card-body">
-                <div class="meal-section mb-4">
-                    <h6 class="text-primary">صبحانه:</h6>
-                    <div class="ml-4">
+    <!-- Meal Plan Section -->
+    <div class="plan-section meals">
+        <div class="section-header">
+            <h2>برنامه غذایی روزانه</h2>
+        </div>
+        <div class="section-content">
+            <div class="meal-grid">
+                <div class="meal-card">
+                    <div class="meal-header">
+                        <span class="meal-icon">🍳</span>
+                        <h3>صبحانه</h3>
+                    </div>
+                    <div class="meal-content">
                         {{ diet_plan.breakfast|linebreaks|default:"برنامه صبحانه تعریف نشده" }}
                     </div>
                 </div>
-                <div class="meal-section mb-4">
-                        <h6 class="text-primary">میان وعده‌ها:</h6>
-                        <div class="ml-4">
-                            {{ diet_plan.snacks|linebreaks|default:"برنامه میان وعده تعریف نشده" }}
-                        </div>
+
+                <div class="meal-card">
+                    <div class="meal-header">
+                        <span class="meal-icon">🥪</span>
+                        <h3>میان وعده صبح</h3>
                     </div>
-                <div class="meal-section mb-4">
-                        <h6 class="text-primary">ناهار:</h6>
-                        <div class="ml-4">
-                            {{ diet_plan.lunch|linebreaks|default:"برنامه ناهار تعریف نشده" }}
+                    <div class="meal-content">
+                        {{ diet_plan.snacks|linebreaks|default:"برنامه میان وعده تعریف نشده" }}
                     </div>
                 </div>
-                <div class="meal-section mb-4">
-                    <h6 class="text-primary">میان وعده‌ها:</h6>
-                    <div class="ml-4">
+
+                <div class="meal-card">
+                    <div class="meal-header">
+                        <span class="meal-icon">🍱</span>
+                        <h3>ناهار</h3>
+                    </div>
+                    <div class="meal-content">
+                        {{ diet_plan.lunch|linebreaks|default:"برنامه ناهار تعریف نشده" }}
+                    </div>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-header">
+                        <span class="meal-icon">🍎</span>
+                        <h3>میان وعده عصر</h3>
+                    </div>
+                    <div class="meal-content">
                         {{ diet_plan.snacks2|linebreaks|default:"برنامه میان وعده تعریف نشده" }}
                     </div>
                 </div>
-                <div class="meal-section mb-4">
-                    <h6 class="text-primary">شام:</h6>
-                    <div class="ml-4">
+
+                <div class="meal-card">
+                    <div class="meal-header">
+                        <span class="meal-icon">🍽️</span>
+                        <h3>شام</h3>
+                    </div>
+                    <div class="meal-content">
                         {{ diet_plan.dinner|linebreaks|default:"برنامه شام تعریف نشده" }}
                     </div>
                 </div>
-                {% if diet_plan.notes %}
-                    <div class="alert alert-info">
-                        <h6>نکات مهم:</h6>
-                        {{ diet_plan.notes|linebreaks }}
-                    </div>
-                {% endif %}
             </div>
         </div>
-    {% else %}
-        <div class="alert alert-warning">
-            <h5>توجه!</h5>
-            <p>{{ error|default:"در حال حاضر برنامه غذایی مناسبی برای شما یافت نشد. لطفاً با پشتیبانی تماس بگیرید." }}</p>
+    </div>
+
+    {% if diet_plan.notes %}
+    <!-- Notes Section -->
+    <div class="plan-section notes">
+        <div class="section-header">
+            <h2>نکات مهم</h2>
         </div>
+        <div class="section-content">
+            {{ diet_plan.notes|linebreaks }}
+        </div>
+    </div>
+    {% endif %}
+    
+    {% else %}
+    <div class="error-message">
+        <span class="error-icon">⚠️</span>
+        <p>{{ error|default:"در حال حاضر برنامه غذایی مناسبی برای شما یافت نشد. لطفاً با پشتیبانی تماس بگیرید." }}</p>
+    </div>
     {% endif %}
 </div>
-
-<style>
-    .meal-section {
-        border-left: 3px solid #007bff;
-        padding-left: 15px;
-    }
-</style>
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.urls import path
 from . views import UserInfoView , DietGoalView , ActivityLevelView , DietPlanView
 
-app_name = 'diet'
+app_name = "mealplan"
 
 urlpatterns = [
     path("info/", UserInfoView.as_view(), name="user_info"),

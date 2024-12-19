@@ -1,12 +1,60 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<div class="container">
-    <h2>اطلاعات شخصی</h2>
-    <form method="post">
+<div class="user-info-container">
+    <div class="info-header">
+        <h2>User Information</h2>
+        <p class="subtitle">Please fill in your details</p>
+    </div>
+
+    <form method="POST" class="info-form" action="{% url "mealplan:user_info" %}">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">مرحله بعد</button>
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors }}
+            </div>
+        {% endif %}
+        <!-- First Name -->
+        <div class="form-group">
+            <label for="{{ form.first_name.id_for_label }}">First Name</label>
+            {{ form.first_name }}
+        </div>
+        <!-- Gender -->
+        <div class="input-field">
+            <label>Gender</label>
+            <div class="gender-options">
+                <div class="gender-option">
+                    <input type="radio" id="male" name="{{ form.gender.name }}" value="M" class="gender-input">
+                    <label for="male" class="gender-label">مرد</label>
+                </div>
+                <div class="gender-option">
+                    <input type="radio" id="female" name="{{ form.gender.name }}" value="F" class="gender-input">
+                    <label for="female" class="gender-label">زن</label>
+                </div>
+            </div>
+        </div>
+        <!-- Age -->
+        <div class="form-group">
+            <label for="{{ form.age.id_for_label }}">Age</label>
+            {{ form.age }}
+        </div>
+
+        <!-- Weight -->
+        <div class="form-group">
+            <label for="{{ form.weight.id_for_label }}">Weight</label>
+            {{ form.weight }}
+        </div>
+
+        <!-- Height -->
+        <div class="form-group">
+            <label for="{{ form.height.id_for_label }}">Height</label>
+            {{ form.height }}
+        </div>
+        <br>
+        <div class="navigation-buttons">
+            <a href="/" class="back-button">BACK</a>
+            <button type="submit" class="next-button">NEXT</button>
+        </div>
     </form>
 </div>
 {% endblock %}

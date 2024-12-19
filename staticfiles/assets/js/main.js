@@ -202,3 +202,79 @@
       });
   });
 })();
+document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('.goal-checkbox');
+    const form = document.querySelector('.goals-form');
+    const maxSelections = 3;
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const selectedCount = document.querySelectorAll('.goal-checkbox:checked').length;
+            
+            if (selectedCount > maxSelections) {
+                this.checked = false;
+            }
+            
+            // Ensure only one weight goal is selected
+            if (this.checked && isWeightGoal(this.value)) {
+                checkboxes.forEach(cb => {
+                    if (cb !== this && isWeightGoal(cb.value)) {
+                        cb.checked = false;
+                    }
+                });
+            }
+        });
+    });
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const selectedGoals = Array.from(document.querySelectorAll('.goal-checkbox:checked'))
+            .map(checkbox => checkbox.value);
+
+        // Validate selections
+        const hasWeightGoal = selectedGoals.some(goal => 
+            ['lose_weight', 'maintain_weight', 'gain_weight'].includes(goal)
+        );
+
+        if (!hasWeightGoal) {
+            alert('Please select at least one weight goal');
+            return;
+        }
+
+        if (selectedGoals.length === 0 || selectedGoals.length > 3) {
+            alert('Please select between 1 and 3 goals');
+            return;
+        }
+
+        // Send data to server
+        fetch('/your-django-url/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            },
+            body: JSON.stringify({
+                goals: selectedGoals
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = data.next_url;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+    function isWeightGoal(value) {
+        return ['lose_weight', 'maintain_weight', 'gain_weight'].includes(value);
+    }
+
+    // Handle back button
+    document.querySelector('.back-button').addEventListener('click', function() {
+        window.history.back();
+    });
+});

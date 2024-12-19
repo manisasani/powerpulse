@@ -1,12 +1,49 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<div class="container">
-    <h2>سطح فعالیت</h2>
-    <form method="post">
+<div class="goals-container">
+    <div class="goals-header">
+        <h2>Set Your Activity Level</h2>
+        <p class="subtitle">Select the option that best describes your daily activity level.</p>
+    </div>
+
+    <form method="POST" id="goalsForm" class="goals-form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">دریافت برنامه غذایی</button>
+        <div class="goals-list">
+            <!-- ایجاد گزینه‌ها بر اساس queryset فیلد فرم -->
+            {% for choice in form.fields.activity_level.queryset %}
+            <div class="goal-option">
+                <!-- مقدار value باید pk باشد -->
+                <input 
+                    type="radio" 
+                    id="activity-{{ choice.pk }}" 
+                    name="activity_level" 
+                    value="{{ choice.pk }}" 
+                    class="goal-checkbox" 
+                    {% if form.activity_level.value == choice.pk %}checked{% endif %} 
+                    required>
+                <label for="activity-{{ choice.pk }}" class="goal-button">{{ choice }}</label>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- نمایش خطاها (در صورت وجود) -->
+        {% if form.errors %}
+        <div class="form-errors">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="navigation-buttons">
+            <a href="{% url 'mealplan:diet_plan' %}" class="back-button">BACK</a>
+            <button type="submit" id="nextButton" class="next-button">NEXT</button>
+        </div>
     </form>
 </div>
 {% endblock %}
